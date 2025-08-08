@@ -1,4 +1,4 @@
-#include <varargs.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1554,26 +1554,10 @@ static void
 f_call_c(int num_arg)
 {
     void (*func)(struct svalue *);
-    int f1 = 0;
-#ifdef __alpha
-    int f2 = 0;
-#endif
-    
-    ((char *)&f1)[0] = pc[0];
-    ((char *)&f1)[1] = pc[1];
-    ((char *)&f1)[2] = pc[2];
-    ((char *)&f1)[3] = pc[3];
-    pc += 4;
-#ifdef __alpha
-    ((char *)&f2)[0] = pc[0];
-    ((char *)&f2)[1] = pc[1];
-    ((char *)&f2)[2] = pc[2];
-    ((char *)&f2)[3] = pc[3];
-    pc += 4;
-    func = (void (*)(struct svalue *))((long)f1 | ((long)f2 << 32));
-#else
-    func = (void (*)(struct svalue *))f1;
-#endif
+
+	// stolen from upstream
+	memcpy(&func, pc, sizeof(func));
+	pc += sizeof(func);
     func(fp);
 }
 

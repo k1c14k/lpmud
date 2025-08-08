@@ -334,6 +334,12 @@ ins_long(int l)
     add_to_mem_block(A_PROGRAM, (char *)&l+3, 1);
 }
 
+static INLINE void
+ins_mem(void *data, size_t n)
+{
+   add_to_mem_block(A_PROGRAM, data, n);
+}
+
 /*
  * Return 1 on success, 0 on failure.
  */

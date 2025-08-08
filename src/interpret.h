@@ -1,3 +1,4 @@
+#pragma once
 #define push_svalue(val) \
     { \
 	if (sp + 1 >= &start_of_stack[EVALUATOR_STACK_SIZE]) \
@@ -5,9 +6,6 @@
 	sp++; \
 	assign_svalue_no_free(sp, val); \
     }
-
-extern struct svalue *sp;
-extern struct svalue start_of_stack[];
 
 union u {
     char *string;
@@ -44,6 +42,9 @@ struct svalue {
 #define STRING_MSTRING	0	/* Allocated by malloc() */
 #define STRING_SSTRING	1	/* Allocated by the shared string library */
 #define STRING_CSTRING	2	/* Do not has to be freed at all */
+
+extern struct svalue *sp;
+extern struct svalue start_of_stack[];
 
 struct vector {
     short size;

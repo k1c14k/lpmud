@@ -224,7 +224,7 @@ void preload_objects (int);
 int random_number (int, int);
 int replace_interactive (struct object *ob, struct object *obf, char *);
 int get_current_time (void);
-char *time_string (int);
+char *time_string (time_t);
 char *process_string (char *, int);
 #ifdef DEBUG
 void update_ref_counts_for_players (void);

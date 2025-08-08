@@ -142,7 +142,7 @@ set_current_time()
 }
 
 char *
-time_string(int t)
+time_string(time_t t)
 {
-    return ctime((time_t *)&t);
+    return ctime(&t);
 }

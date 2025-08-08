@@ -77,7 +77,7 @@ WARN=-Wall -Wshadow -Wstrict-prototypes
 # If you will not change anything, you are still strongly to have it defined,
 # as long as the game is not bug free.
 #DEBUG=
-DEBUG=-DDEBUG
+DEBUG=-DDEBUG -ggdb
 #
 #
 
@@ -108,7 +108,7 @@ DEBUG=-DDEBUG
 # Linux
 #  Some versions might require -lcrypt added to SYS_LIBS
 SYS_CFLAGS=-pipe -D__USE_BSD_SIGNAL
-SYS_OPT=-O2 -fomit-frame-pointer
+SYS_OPT=-O0 -fomit-frame-pointer -std=gnu89
 SYS_LIBS=-lcrypt
 CC=/usr/bin/gcc
 ULIBS=

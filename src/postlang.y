@@ -372,12 +372,7 @@ def: type optional_star fun_identifier
 			    $3, $<string>9);
 		    yyerror(buf);
 		}
-#ifdef __alpha
-		ins_long((int)((long)funca & 0xffffffff));
-		ins_long((int)((long)funca >> 32));
-#else
-		ins_long((int)(long)funca);
-#endif
+        ins_mem(&funca, sizeof(funca));
 		if (!is_dtor)
 		    ins_f_byte(F_DO_INVARIANTS);
 		ins_f_byte(F_RETURN);

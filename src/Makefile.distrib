@@ -34,24 +34,18 @@ driver: $(OBJ) lang.o ${IOBJ}
 func_spec.i: func_spec.c
 	$(CC) -E $(CFLAGS) func_spec.c > func_spec.i
 
-master.t master.h: master.n genfkntab
-	./genfkntab m master <master.n
+master.t master.h: master.n genfkntab.py
+	./genfkntab.py m master <master.n
 
 make_func.c: make_func.y
 	$(YACC) make_func.y
 	mv y.tab.c make_func.c
 
-genfkntab: genfkntab.o
-	$(CC) genfkntab.o -o genfkntab
-
 make_func: make_func.o
 	$(CC) make_func.o -o make_func
 
-make_table: make_table.o
-	$(CC) make_table.o -o make_table
-
-efun_table.h: lang.h make_table
-	./make_table lang.h efun_table.h
+efun_table.h: lang.h make_table.py
+	./make_table.py lang.h efun_table.h
 
 lang.y efun_defs.c: func_spec.i make_func prelang.y postlang.y config.h
 	./make_func > tmp_efun_defs

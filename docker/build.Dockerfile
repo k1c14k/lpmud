@@ -9,4 +9,5 @@ RUN apt-get update \
     cmake \
     gdb \
     yacc \
+    python3 \
   && apt-get clean
