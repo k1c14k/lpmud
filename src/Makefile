@@ -3,10 +3,10 @@ MAKE=make
 
 # Set MUD_LIB to the directory which contains the mud data. Was formerly
 # defined in config.h !
-MUD_LIB = /home/arkadia/public-dist/lib
+MUD_LIB ?= $(HOME)/mudlib
 
 # Set BINDIR to the directory where you want to install the executables.
-BINDIR = /home/arkadia/public-dist/bin
+BINDIR ?= $(HOME)/mudbin
 
 # Specify the interface source files on the ISRC line, and the corresponding
 # object files on the IOBJ line.
@@ -191,3 +191,5 @@ check:
 	-$(MAKE) -f Makefile.distrib $@
 
 DUMMY:
+
+all: driver utils
