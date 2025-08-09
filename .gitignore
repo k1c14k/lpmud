@@ -9,6 +9,17 @@ make_func*
 master.h
 master.t
 
+efun_defs.c
+efun_table.h
+
+func_spec.i
+
+lang.c
+lang.h
+lang.y
+
+
+
 # Logs
 lib/GAME_START*
 lib/LP_SWAP*
