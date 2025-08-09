@@ -34,8 +34,8 @@
  * This array contains the default setup of domains of this LPmud.
  */
 #define DEFAULT_DOMAINS ([ \
-    "Standard":({0,"gen","postmaster",({"postmaster",}),"",1,0,0,0 }), \
-    "Wiz":({1,"wiz","wiz",({"wiz","root",}),"",1,0,0,0}),])
+    "Standard":({0,"gen","postmaster",({"postmaster",}),({"",}),1,0,0,0 }), \
+    "Wiz":({1,"wiz","wiz",({"wiz","root",}),({"wiz",}),1,0,0,0}),])
 
 /*
  * WIZARD_DOMAIN
