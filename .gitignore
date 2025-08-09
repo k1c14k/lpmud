@@ -1,3 +1,16 @@
-bin/
-*.swp
+# JetBrains CLion IDE
+.idea
+
+# Compiled object files
 *.o
+
+# Generated files
+make_func*
+master.h
+master.t
+
+# Logs
+lib/GAME_START*
+lib/LP_SWAP*
+lib/binaries
+lib/syslog
