@@ -18,7 +18,9 @@ lang.c
 lang.h
 lang.y
 
-
+# Executable files
+hname
+driver
 
 # Logs
 lib/GAME_START*
