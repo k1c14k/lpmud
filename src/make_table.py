@@ -18,7 +18,9 @@ with open(input_file, 'r') as f:
         if not line.startswith('#'):
             continue
         tokens = line[1:].split()
-        if len(tokens) < 2 or tokens[0] != 'define' or tokens[1] == '_yy_defines_h_' or tokens[1] == 'YYSTYPE_IS_DECLARED':
+        if (len(tokens) < 3 or tokens[0] != 'define' or 
+            tokens[1] == '_yy_defines_h_' or tokens[1] == 'YYSTYPE_IS_DECLARED' or
+            tokens[1].startswith('yy') or tokens[1].startswith('YY')):
             continue
         name = tokens[1]
         value = tokens[2]

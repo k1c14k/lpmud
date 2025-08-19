@@ -3,10 +3,10 @@ MAKE=make
 
 # Set MUD_LIB to the directory which contains the mud data. Was formerly
 # defined in config.h !
-MUD_LIB ?= $(HOME)/mudlib
+MUD_LIB = /mud/lib
 
 # Set BINDIR to the directory where you want to install the executables.
-BINDIR ?= $(HOME)/mudbin
+BINDIR = /mud/bin
 
 # Specify the interface source files on the ISRC line, and the corresponding
 # object files on the IOBJ line.
@@ -15,10 +15,10 @@ ISRC= clib/efun.c clib/stdobject.c clib/gl_language.c
 IOBJ= clib/efun.o clib/stdobject.o clib/gl_language.o
 
 # List of objects that might not exist in your standard library
-# Select from: drand48.[co], strerror.[co], strpbrk.[co], strtod.[co],
-#              snprintf.[co], vprintf.[co]
-MISSING_SRC=drand48.c snprintf.c
-MISSING_OBJ=drand48.o snprintf.o
+# Select from: ualarm.[co], drand48.[co], strerror.[co], strpbrk.[co],
+#              strtod.[co], snprintf.[co], vprintf.[co]
+MISSING_SRC=ualarm.c drand48.c
+MISSING_OBJ=ualarm.o drand48.o
 
 # Chose one of these mallocs:
 # This is the standard malloc for the CD gamedriver. It is quite fast
@@ -52,11 +52,11 @@ RAND=DRAND48
 #YACC=byacc
 
 # Bison from the FSF. Produces good code. Is available for anonymous ftp.
-#YACC=bison -y
+YACC=bison -y
 
 # Standard yacc. Should be available on any Unix system worth its salt.
 # WARNING: This will probably not work on all systems!
-YACC=yacc
+#YACC=yacc
 
 # If you don't have 'strchr', then add next flag to CFLAGS.
 # -Dstrchr=index -Dstrrchr=rindex
@@ -66,8 +66,8 @@ PROFIL=
 #PROFIL=-pg
 #PROFIL=-pg -non_shared
 #Enable warnings from the compiler, if wanted.
-WARN=-Wall -Wshadow -Wstrict-prototypes
-#WARN=
+#WARN=-Wall -Wshadow -Wstrict-prototypes
+WARN=
 #
 # Enable run time debugging. It will use more time and space.
 # When the flag is changed, be sure to recompile everything.
@@ -76,14 +76,14 @@ WARN=-Wall -Wshadow -Wstrict-prototypes
 # DEBUG defined.
 # If you will not change anything, you are still strongly to have it defined,
 # as long as the game is not bug free.
-#DEBUG=
-DEBUG=-DDEBUG -ggdb
+DEBUG=
+#DEBUG=-DDEBUG
 #
 #
 
 # System dependent flags
 # VAX BSD gcc
-#SYS_CFLAGS=-DVAX_BSD
+#SYS_CFLAGS=-pipe -DVAX_BSD
 #SYS_OPT=-g -O2
 #SYS_LIBS=
 #ULIBS=
@@ -91,14 +91,14 @@ DEBUG=-DDEBUG -ggdb
 
 # OpenBSD (All platforms)
 #SYS_CFLAGS=
-#SYS_OPT=-g -O3
+#SYS_OPT=-g -O2
 #SYS_LIBS=
 #CC=gcc
 #ULIBS=
 #LINTFILTER=sedf.sun
 
 # NetBSD or FreeBSD
-#SYS_CFLAGS=-pipe
+#SYS_CFLAGS=
 #SYS_OPT=-g -O2
 #SYS_LIBS=-lcrypt
 #CC=gcc
@@ -106,24 +106,23 @@ DEBUG=-DDEBUG -ggdb
 #LINTFILTER=sedf.sun
 
 # Linux
-#  Some versions might require -lcrypt added to SYS_LIBS
-SYS_CFLAGS=-pipe -D__USE_BSD_SIGNAL
-SYS_OPT=-O0 -fomit-frame-pointer -std=gnu89
-SYS_LIBS=-lcrypt
-CC=/usr/bin/gcc
-ULIBS=
-LINTFILTER=sedf.sun
+#SYS_CFLAGS=-pipe -D__USE_BSD_SIGNAL
+#SYS_OPT=-g -O2 -m486
+#SYS_LIBS=
+#CC=gcc
+#ULIBS=
+#LINTFILTER=sedf.sun
 
-# BSD/OS 2.x, 3.x and 4.x
-#SYS_CFLAGS=-pipe
-#SYS_OPT=-g -O2
+# BSD/OS 2.x and 3.x
+#SYS_CFLAGS=
+#SYS_OPT=-g -O2 -m486
 #SYS_LIBS=
 #CC=gcc
 #ULIBS=
 #LINTFILTER=sedf.sun
 
 # SunOS 4 gcc
-#SYS_CFLAGS=
+#SYS_CFLAGS=-pipe
 #SYS_OPT=-g -O2
 #SYS_LIBS=
 #CC=gcc
@@ -140,22 +139,13 @@ LINTFILTER=sedf.sun
 #ULIBS=-lresolv -lsocket -lnsl
 #LINTFILTER=sedf.sysv
 
-# DEC Alpha cc
-#SYS_CFLAGS=
-#SYS_OPT=-g3 -O2 -Olimit 3000
-#SYS_LIB=
-#CC=cc
-#ULIBS=
-#LINTFILTER=sedf.sun
-
-# Irix
-#SYS_CFLAGS=-DSOLARIS
-#SYS_OPT=-g -O2
-#SYS_LIBS=
-#CC=gcc
-#ULIBS=
-#LINTFILTER=sedf.sysv
-
+# Linux
+SYS_CFLAGS=-pipe -D__USE_BSD_SIGNAL
+SYS_OPT=-g -O2
+SYS_LIBS=-lcrypt
+CC=gcc
+ULIBS=
+LINTFILTER=sedf.sun
 
 CFLAGS=  $(SYS_CFLAGS) $(SYS_OPT) -DWORD_WRAP -D$(RAND) -DMALLOC_$(MALLOC) \
  $(WARN) $(DEBUG) $(DEBUG_MALLOC)
@@ -191,5 +181,3 @@ check:
 	-$(MAKE) -f Makefile.distrib $@
 
 DUMMY:
-
-all: driver utils
